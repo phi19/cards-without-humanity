@@ -2,6 +2,8 @@ version: "3.9"
 
 volumes:
   frontend-build:
+  certs:
+  certbot-www:
 
 services:
   # ==========================
@@ -31,7 +33,7 @@ services:
       - "3000:3000"
 
   # ==========================
-  # Nginx (Reverse Proxy + HTTP)
+  # Nginx (Reverse Proxy + HTTP and HTTPS)
   # ==========================
   nginx:
     build:
@@ -39,10 +41,25 @@ services:
       dockerfile: Dockerfile
     container_name: cards-nginx
     restart: always
-    ports:
-      - "80:80"
     depends_on:
       - frontend-ssr
       - backend
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
       - frontend-build:/usr/share/nginx/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/ssl-enabled:/etc/nginx/conf.d/ssl-enabled:ro
+      - certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+
+  # ==========================
+  # Certbot (Let's Encrypt)
+  # ==========================
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
