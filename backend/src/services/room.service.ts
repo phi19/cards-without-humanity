@@ -308,6 +308,9 @@ export class RoomService {
       return;
     }
 
+    // Then, there are no online users, except for the host
+    // It actually shall conserve the room and wait 5 minutes for the host to come back
+
     // If there are not any online users, delete the room
     console.log("Online users except host length = 0");
     console.log("Deleting room...", roomId);
