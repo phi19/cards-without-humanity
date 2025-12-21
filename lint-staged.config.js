@@ -7,7 +7,7 @@ module.exports = {
         "prettier --write",
         "npm --prefix backend run lint --if-present"
     ],
-    "shared/**/*.{ts,js,json,prisma}": [
+    "cah-shared/**/*.{ts,js,json,prisma}": [
         "prettier --write",
         "npm --prefix backend run lint --if-present"
     ]

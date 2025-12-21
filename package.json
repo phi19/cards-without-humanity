@@ -14,15 +14,11 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "build": "npm -w cah-shared run build && npm -w backend run build && npm -w frontend run build",
-    "postinstall": "npm --workspace shared run build"
+    "postinstall": "npm --workspace cah-shared run build"
   },
   "workspaces": [
-    "shared",
+    "cah-shared",
     "frontend",
     "backend"
-  ],
-  "dependencies": {
-    "@ngx-translate/core": "^17.0.0",
-    "@ngx-translate/http-loader": "^17.0.0"
-  }
+  ]
 }
