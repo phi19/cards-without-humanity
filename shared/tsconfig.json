@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
+    "rootDir": "src", // Root directory for your TypeScript source files
+    "outDir": "dist",
+    "declaration": true,
+    "module": "commonjs",
+    "target": "es2020",
+    "esModuleInterop": true,
+    "strict": true,
     "types": ["node"],
     "lib": ["es2020"],
-    "rootDir": "./", // Root directory for your TypeScript source files
     "skipLibCheck": true, // Skip type checking of all declaration files (*.d.ts)
     "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased file names.
     "resolveJsonModule": true, // Allow importing .json files
     "sourceMap": true, // Generate source maps for debugging
-    "target": "es2020",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
     "emitDeclarationOnly": false
   },
-  "include": ["src", "src/index.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

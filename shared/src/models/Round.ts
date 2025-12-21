@@ -1,5 +1,4 @@
 import { RoundStatus } from '../enums/RoundStatus';
-import { AnswerCard } from './AnswerCard';
 import { PlayerResponse } from './Player';
 import { PromptCard } from './PromptCard';
 

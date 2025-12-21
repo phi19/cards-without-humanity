@@ -1,3 +1,4 @@
-export * from './src/socket/payloads.js';
-export * from './src/socket';
-export * from './src/models';
+export * from './socket/payloads.js';
+export * from './socket/index.js';
+export * from './models/index.js';
+export * from './enums/index.js';

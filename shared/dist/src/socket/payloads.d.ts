@@ -2,12 +2,13 @@ import { AnswerCard } from '../models/AnswerCard';
 import { IncompleteGame } from '../models/Game';
 import { RoundResponse } from '../models/Round';
 export interface StartingGamePayload {
-    game: IncompleteGame;
+  game: IncompleteGame;
 }
 export interface MiddleGamePayload {
-    round: RoundResponse;
-    handPick: AnswerCard[];
+  round: RoundResponse;
+  handPick: AnswerCard[];
 }
 export interface EndRoundPayload {
-    reason: 'timeout' | 'all_played';
+  reason: 'timeout' | 'all_played';
+  round: RoundResponse;
 }
