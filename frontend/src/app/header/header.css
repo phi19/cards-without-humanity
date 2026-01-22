@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,5 +20,9 @@
   padding: 0;
   margin: 0;
   line-height: 100%;
-}
+  cursor: pointer;
 
+  background: initial;
+  color: white;
+  border: 0;
+}
