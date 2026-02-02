@@ -15,7 +15,12 @@ export const routes: Routes = [
   { path: 'decks/create-deck', component: CreateDeckComponent },
 
   { path: 'login', component: LoginComponent },
-  { path: 'room/:roomId', component: RoomComponent, canActivate: [authGuard] },
+  {
+    path: 'room/:roomId',
+    component: RoomComponent,
+    canActivate: [authGuard], // tell Angular not to prerender
+    data: { prerender: false },
+  },
   { path: 'rooms-list', component: RoomsListComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },
