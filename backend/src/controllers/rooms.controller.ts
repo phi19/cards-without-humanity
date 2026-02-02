@@ -1,7 +1,7 @@
 // src/controllers/auth.controller.ts
 import { NextFunction, Request, Response } from "express";
 import { RoomService } from "../services/room.service";
-import { CreateRoomResponse } from "../types/rooms";
+import { CreateRoomResponse } from "cah-shared";
 
 // Instantiate the service (can be done with dependency injection in larger apps)
 const roomService = new RoomService();
