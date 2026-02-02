@@ -21,6 +21,5 @@ export const routes: Routes = [
     canActivate: [authGuard], // tell Angular not to prerender
   },
   { path: 'rooms-list', component: RoomsListComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' },
+  { path: '', component: Home },
 ];
