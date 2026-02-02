@@ -7,7 +7,6 @@
     "start": "ng serve",
     "build": "ng build",
     "preinstall": "cd ../shared && npm install && npm run build",
-    "postinstall": "echo Shared ready",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
