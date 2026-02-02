@@ -22,6 +22,7 @@ export class AuthService implements OnDestroy {
   loadingAuth: WritableSignal<boolean> = signal(true);
 
   constructor() {
+    console.log(environment.socketUrl);
     this.checkAuth().pipe(takeUntil(this.destroy$)).subscribe();
   }
 
