@@ -19,7 +19,6 @@ export const routes: Routes = [
     path: 'room/:roomId',
     component: RoomComponent,
     canActivate: [authGuard], // tell Angular not to prerender
-    data: { prerender: false },
   },
   { path: 'rooms-list', component: RoomsListComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
