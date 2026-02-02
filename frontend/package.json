@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "vercel-build": "sed -i 's|__BACKEND_URL__|'$__BACKEND_URL'|g' src/environments/environment.prod.ts && ng build --configuration production",
     "preinstall": "cd ../shared && npm install && npm run build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
