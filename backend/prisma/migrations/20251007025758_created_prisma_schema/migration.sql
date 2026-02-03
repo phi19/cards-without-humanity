@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `Deck` (
+CREATE TABLE `deck` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `Deck` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `PromptCard` (
+CREATE TABLE `promptcard` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `PromptCard` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `AnswerCard` (
+CREATE TABLE `answercard` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `AnswerCard` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `User` (
+CREATE TABLE `user` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `User` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Room` (
+CREATE TABLE `room` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `Room` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `RoomUser` (
+CREATE TABLE `roomuser` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `RoomUser` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Game` (
+CREATE TABLE `game` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -86,10 +86,10 @@ CREATE TABLE `Game` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-ALTER TABLE `Game` DROP COLUMN `winningScore`;
+ALTER TABLE `game` DROP COLUMN `winningScore`;
 
 -- CreateTable
-CREATE TABLE `Player` (
+CREATE TABLE `player` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE `Player` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Round` (
+CREATE TABLE `round` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `Round` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `GameDeck` (
+CREATE TABLE `gamedeck` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE `GameDeck` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `PlayerHandCard` (
+CREATE TABLE `playerhandcard` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE `PlayerHandCard` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `RoundPick` (
+CREATE TABLE `roundpick` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -154,55 +154,55 @@ CREATE TABLE `RoundPick` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `PromptCard` ADD CONSTRAINT `PromptCard_deckId_fkey` FOREIGN KEY (`deckId`) REFERENCES `Deck`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `promptcard` ADD CONSTRAINT `PromptCard_deckId_fkey` FOREIGN KEY (`deckId`) REFERENCES `deck`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `AnswerCard` ADD CONSTRAINT `AnswerCard_deckId_fkey` FOREIGN KEY (`deckId`) REFERENCES `Deck`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `answercard` ADD CONSTRAINT `AnswerCard_deckId_fkey` FOREIGN KEY (`deckId`) REFERENCES `deck`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Room` ADD CONSTRAINT `Room_hostId_fkey` FOREIGN KEY (`hostId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `room` ADD CONSTRAINT `Room_hostId_fkey` FOREIGN KEY (`hostId`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `RoomUser` ADD CONSTRAINT `RoomUser_roomId_fkey` FOREIGN KEY (`roomId`) REFERENCES `Room`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `roomuser` ADD CONSTRAINT `RoomUser_roomId_fkey` FOREIGN KEY (`roomId`) REFERENCES `room`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `RoomUser` ADD CONSTRAINT `RoomUser_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `roomuser` ADD CONSTRAINT `RoomUser_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Game` ADD CONSTRAINT `Game_roomId_fkey` FOREIGN KEY (`roomId`) REFERENCES `Room`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `game` ADD CONSTRAINT `Game_roomId_fkey` FOREIGN KEY (`roomId`) REFERENCES `room`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Player` ADD CONSTRAINT `Player_gameId_fkey` FOREIGN KEY (`gameId`) REFERENCES `Game`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `player` ADD CONSTRAINT `Player_gameId_fkey` FOREIGN KEY (`gameId`) REFERENCES `game`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Player` ADD CONSTRAINT `Player_roomUserId_fkey` FOREIGN KEY (`roomUserId`) REFERENCES `RoomUser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `player` ADD CONSTRAINT `Player_roomUserId_fkey` FOREIGN KEY (`roomUserId`) REFERENCES `roomuser`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Round` ADD CONSTRAINT `Round_gameId_fkey` FOREIGN KEY (`gameId`) REFERENCES `Game`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `round` ADD CONSTRAINT `Round_gameId_fkey` FOREIGN KEY (`gameId`) REFERENCES `game`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Round` ADD CONSTRAINT `Round_czarId_fkey` FOREIGN KEY (`czarId`) REFERENCES `Player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `round` ADD CONSTRAINT `Round_czarId_fkey` FOREIGN KEY (`czarId`) REFERENCES `player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Round` ADD CONSTRAINT `Round_winnerId_fkey` FOREIGN KEY (`winnerId`) REFERENCES `Player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `round` ADD CONSTRAINT `Round_winnerId_fkey` FOREIGN KEY (`winnerId`) REFERENCES `player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Round` ADD CONSTRAINT `Round_promptCardId_fkey` FOREIGN KEY (`promptCardId`) REFERENCES `PromptCard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `round` ADD CONSTRAINT `Round_promptCardId_fkey` FOREIGN KEY (`promptCardId`) REFERENCES `promptcard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `GameDeck` ADD CONSTRAINT `GameDeck_deckId_fkey` FOREIGN KEY (`deckId`) REFERENCES `Deck`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `gamedeck` ADD CONSTRAINT `GameDeck_deckId_fkey` FOREIGN KEY (`deckId`) REFERENCES `deck`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `GameDeck` ADD CONSTRAINT `GameDeck_gameId_fkey` FOREIGN KEY (`gameId`) REFERENCES `Game`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `gamedeck` ADD CONSTRAINT `GameDeck_gameId_fkey` FOREIGN KEY (`gameId`) REFERENCES `game`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `PlayerHandCard` ADD CONSTRAINT `PlayerHandCard_playerId_fkey` FOREIGN KEY (`playerId`) REFERENCES `Player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `playerhandcard` ADD CONSTRAINT `PlayerHandCard_playerId_fkey` FOREIGN KEY (`playerId`) REFERENCES `player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `PlayerHandCard` ADD CONSTRAINT `PlayerHandCard_cardId_fkey` FOREIGN KEY (`cardId`) REFERENCES `AnswerCard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `playerhandcard` ADD CONSTRAINT `PlayerHandCard_cardId_fkey` FOREIGN KEY (`cardId`) REFERENCES `answercard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `RoundPick` ADD CONSTRAINT `RoundPick_roundId_fkey` FOREIGN KEY (`roundId`) REFERENCES `Round`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `roundpick` ADD CONSTRAINT `RoundPick_roundId_fkey` FOREIGN KEY (`roundId`) REFERENCES `round`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `RoundPick` ADD CONSTRAINT `RoundPick_cardId_fkey` FOREIGN KEY (`cardId`) REFERENCES `AnswerCard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `roundpick` ADD CONSTRAINT `RoundPick_cardId_fkey` FOREIGN KEY (`cardId`) REFERENCES `answercard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

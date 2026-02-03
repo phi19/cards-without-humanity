@@ -14,7 +14,7 @@ DROP INDEX `RoomUser_userId_isHost_key` ON `roomuser`;
 ALTER TABLE `roomuser` DROP COLUMN `isHost`;
 
 -- Drop old FK
-ALTER TABLE `Round` DROP FOREIGN KEY `Round_promptCardId_fkey`;
+ALTER TABLE `round` DROP FOREIGN KEY `Round_promptCardId_fkey`;
 
 -- AddForeignKey
-ALTER TABLE `Round` ADD CONSTRAINT `Round_promptCardId_fkey` FOREIGN KEY (`promptCardId`) REFERENCES `PromptCard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `round` ADD CONSTRAINT `Round_promptCardId_fkey` FOREIGN KEY (`promptCardId`) REFERENCES `promptcard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

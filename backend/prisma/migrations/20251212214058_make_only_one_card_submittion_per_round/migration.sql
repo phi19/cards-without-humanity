@@ -11,7 +11,7 @@ ALTER TABLE `roundpick` DROP FOREIGN KEY `RoundPick_roundId_fkey`;
 DROP INDEX `RoundPick_roundId_cardId_playerId_key` ON `roundpick`;
 
 -- CreateIndex
-CREATE UNIQUE INDEX `RoundPick_roundId_playerId_key` ON `RoundPick`(`roundId`, `playerId`);
+CREATE UNIQUE INDEX `RoundPick_roundId_playerId_key` ON `roundpick`(`roundId`, `playerId`);
 
 -- AddForeignKey
-ALTER TABLE `RoundPick` ADD CONSTRAINT `RoundPick_playerId_fkey` FOREIGN KEY (`playerId`) REFERENCES `Player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `roundpick` ADD CONSTRAINT `RoundPick_playerId_fkey` FOREIGN KEY (`playerId`) REFERENCES `player`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
