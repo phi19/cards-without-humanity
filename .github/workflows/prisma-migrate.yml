@@ -9,10 +9,11 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Enter repository
-        run: cd backend
+    defaults:
+      run:
+        working-directory: backend
 
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
