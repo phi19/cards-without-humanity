@@ -44,6 +44,7 @@ export class AuthController {
 
     const token = generateToken(anonymousUser);
 
+    console.log(token, jwtCookieConfig)
     res.cookie("accessToken", token, jwtCookieConfig);
 
     res.status(200).json(anonymousUser);
