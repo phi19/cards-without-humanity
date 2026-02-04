@@ -10,7 +10,7 @@ import { UserRole } from "@prisma/client";
 export const jwtCookieConfig = {
   httpOnly: true,
   secure: true,
-  sameSite: "none" satisfies "none" | "lax" | "strict",
+  sameSite: "none" as const,
   maxAge: 1000 * 60 * 60, // 1 hour of max age,
   path: "/",
 };
