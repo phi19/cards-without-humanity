@@ -10,7 +10,7 @@ import { UserRole } from "@prisma/client";
 export const jwtCookieConfig = {
   httpOnly: true,
   secure: true,
-  sameSite: "none" as const,
+  sameSite: false,
 };
 
 // Generate JWT for the user
