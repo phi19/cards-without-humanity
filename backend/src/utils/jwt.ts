@@ -10,7 +10,9 @@ import { UserRole } from "@prisma/client";
 export const jwtCookieConfig = {
   httpOnly: true,
   secure: true,
-  sameSite: false,
+  sameSite: "none" satisfies "none" | "lax" | "strict",
+  maxAge: 1000 * 60 * 60, // 1 hour of max age,
+  path: "/",
 };
 
 // Generate JWT for the user
@@ -45,7 +47,7 @@ export const verifyToken = (token: string): JwtPayload => {
 
 export const extractUserFromJWT = (
   cookieString: string,
-  role: UserRole
+  role: UserRole,
 ): JwtPayload => {
   const cookies = getCookies(cookieString);
 
