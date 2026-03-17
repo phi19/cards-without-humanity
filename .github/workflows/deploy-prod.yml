@@ -3,7 +3,7 @@ name: Deploy to Raspberry PI
 on:
   push:
     branches:
-      - main
+      - refactor/application-deployment
 
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: refactor/application-deployment
 
       - name: Deploy to Server via SSH
         uses: appleboy/ssh-action@v0.1.10
@@ -26,7 +26,7 @@ jobs:
 
             APP_DIR="/home/devas/www/cards-without-humanity"
             REPO_URL="https://github.com/DevasNB/cards-without-humanity.git"
-            BRANCH="main"
+            BRANCH="refactor/application-deployment"
 
             mkdir -p /home/devas/www
 
