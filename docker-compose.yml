@@ -1,31 +1,47 @@
 version: "3.9"
 
 volumes:
-  frontend-build:
+  certbot-certs:
+  certbot-www:
 
 services:
-  # ==========================
-  # Angular SSR (Frontend)
-  # ==========================
+
+  nginx:
+    image: nginx:alpine
+    container_name: cards-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - certbot-certs:/etc/letsencrypt:ro
+      - certbot-www:/var/www/certbot:ro
+    depends_on:
+      - frontend-ssr
+      - backend
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: cards-certbot
+    volumes:
+      - certbot-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    # Não inicia automaticamente — é chamado pelo script de renovação
+    entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done"
+
   frontend-ssr:
     build:
       context: ./frontend
       dockerfile: Dockerfile.ssr
     container_name: cards-frontend-ssr
     restart: always
-    ports:
-    - "4000:4000"   
-    volumes:
-      - frontend-build:/app/dist/frontend
+    expose:
+      - "4000"
 
-  # ==========================
-  # Backend (Node.js)
-  # ==========================
   backend:
     build: ./backend
     container_name: cards-backend
     restart: always
     expose:
       - "3000"
-    ports:
-      - "3000:3000"

@@ -43,8 +43,11 @@ jobs:
 
             cd "$APP_DIR"
 
-            echo "Restarting containers..."
+            echo "Rebuilding containers..."
             docker compose down
             docker compose up -d --build
+
+            echo "Reloading Nginx config..."
+            docker compose exec nginx nginx -s reload || true
 
             echo "Deployment completed successfully!"
