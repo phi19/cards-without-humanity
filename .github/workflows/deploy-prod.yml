@@ -21,8 +21,11 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
+          envs: DATABASE_URL
           script: |
             set -e
+
+            export DATABASE_URL="${{ secrets.DATABASE_URL }}"
 
             APP_DIR="/home/cards/www/cards-without-humanity"
             REPO_URL="https://github.com/phi19/cards-without-humanity.git"
@@ -42,6 +45,8 @@ jobs:
             fi
 
             cd "$APP_DIR"
+
+            echo "DATABASE_URL=${DATABASE_URL}" > .env
 
             echo "Rebuilding containers..."
             docker compose down
