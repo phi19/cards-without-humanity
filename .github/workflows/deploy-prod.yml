@@ -24,11 +24,11 @@ jobs:
           script: |
             set -e
 
-            APP_DIR="/home/devas/www/cards-without-humanity"
+            APP_DIR="/home/cards/www/cards-without-humanity"
             REPO_URL="https://github.com/phi19/cards-without-humanity.git"
             BRANCH="refactor/application-deployment"
 
-            mkdir -p /home/devas/www
+            mkdir -p /home/cards/www
 
             if [ ! -d "$APP_DIR/.git" ]; then
               echo "Cloning repository..."

@@ -3,7 +3,7 @@ set -e
 
 DOMAIN="devas.pt"
 EMAIL="joaodevesa2019@gmail.com"
-APP_DIR="/home/devas/www/cards-without-humanity"
+APP_DIR="/home/cards/www/cards-without-humanity"
 
 cd "$APP_DIR"
 
