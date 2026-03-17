@@ -25,7 +25,7 @@ jobs:
             set -e
 
             APP_DIR="/home/devas/www/cards-without-humanity"
-            REPO_URL="https://github.com/DevasNB/cards-without-humanity.git"
+            REPO_URL="https://github.com/phi19/cards-without-humanity.git"
             BRANCH="refactor/application-deployment"
 
             mkdir -p /home/devas/www
