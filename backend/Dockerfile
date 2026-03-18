@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY shared ./shared
 WORKDIR /app/shared
-RUN npm ci && npm run build
+RUN npm install && npm run build
 
 WORKDIR /app/backend
 COPY backend/package*.json ./
