@@ -48,6 +48,14 @@ jobs:
 
             echo "DATABASE_URL=${DATABASE_URL}" > .env
 
+            # Se o certificado já existe, ativa a config SSL
+            if [ -d "/var/lib/docker/volumes/cards-without-humanity_certbot-certs/_data/live/devas.pt" ]; then
+              echo "Certificado SSL encontrado, a usar config SSL..."
+              cp nginx/nginx-ssl.conf nginx/nginx.conf
+            else
+              echo "Sem certificado SSL, a usar config HTTP..."
+            fi
+
             echo "Rebuilding containers..."
             docker compose down
             docker compose up -d --build
