@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY shared ./shared
 
-COPY package*.json ./
-COPY prisma ./prisma
+COPY backend/package*.json ./
+COPY backend/prisma ./prisma
 RUN npm ci
-COPY . .
+COPY backend/ .
 RUN npm run build
 
 # Fase 2: runtime
@@ -15,7 +15,7 @@ FROM node:22-alpine
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
-COPY package*.json ./
+COPY backend/package*.json ./
 RUN npm ci --omit=dev
 
 EXPOSE 3000

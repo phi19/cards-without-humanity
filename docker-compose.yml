@@ -32,7 +32,7 @@ services:
 
   frontend-ssr:
     build:
-      context: ./frontend
+      context: ..
       dockerfile: Dockerfile.ssr
     container_name: cards-frontend-ssr
     restart: always
@@ -40,7 +40,7 @@ services:
       - "4000"
 
   backend:
-    build: ./backend
+    build: ..
     container_name: cards-backend
     restart: always
     expose:
