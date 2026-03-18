@@ -15,3 +15,4 @@ export class App {
   protected readonly title = signal('frontend');
   protected readonly authService = inject(AuthService);
 }
+
