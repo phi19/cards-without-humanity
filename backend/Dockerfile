@@ -9,7 +9,7 @@ RUN npm install && npm run build
 WORKDIR /app/backend
 COPY backend/package*.json ./
 COPY backend/prisma ./prisma
-RUN npm ci
+RUN npm install
 COPY backend/ .
 RUN npm run build
 
@@ -20,7 +20,7 @@ COPY --from=build /app/backend/dist ./dist
 COPY --from=build /app/backend/prisma ./prisma
 COPY --from=build /app/shared ./shared
 COPY backend/package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 EXPOSE 3000
 CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
