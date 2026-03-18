@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "preinstall": "cd ../shared && npm install && npm run build",
     "postinstall": "prisma generate"
   },
   "keywords": [],
@@ -15,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "6.16.0",
-    "cah-shared": "file:../shared",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
