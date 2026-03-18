@@ -32,7 +32,7 @@ services:
 
   frontend-ssr:
     build:
-      context: ..
+      context: .
       dockerfile: frontend/Dockerfile.ssr
     container_name: cards-frontend-ssr
     restart: always
@@ -41,7 +41,7 @@ services:
 
   backend:
     build: 
-      context: ..
+      context: .
       dockerfile: backend/Dockerfile
     container_name: cards-backend
     restart: always
