@@ -1,7 +1,7 @@
 // src/controllers/auth.controller.ts
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../services/auth.service";
-import { CreateUserRequestBody, UserResponse } from "../types/auth";
+import { CreateUserRequestBody, UserResponse } from "cah-shared";
 import { generateToken, jwtCookieConfig } from "../utils/jwt";
 
 // Instantiate the service (can be done with dependency injection in larger apps)
@@ -44,6 +44,7 @@ export class AuthController {
 
     const token = generateToken(anonymousUser);
 
+    console.log(token, jwtCookieConfig)
     res.cookie("accessToken", token, jwtCookieConfig);
 
     res.status(200).json(anonymousUser);

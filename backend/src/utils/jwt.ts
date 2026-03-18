@@ -1,6 +1,7 @@
 // src/utils/jwt.ts
 import jwt from "jsonwebtoken";
-import { JwtPayload, UserResponse } from "../types/auth"; // Your JWT payload type
+import { JwtPayload } from "../types/auth"; // Your JWT payload type
+import { UserResponse } from "cah-shared"; // Your JWT payload type
 import { UnauthorizedError } from "./errors"; // Custom error for auth issues
 import { JWT_SECRET, JWT_EXPIRES_IN } from "../configs/constants";
 import { getCookies } from "./cookies";
@@ -9,7 +10,9 @@ import { UserRole } from "@prisma/client";
 export const jwtCookieConfig = {
   httpOnly: true,
   secure: true,
-  sameSite: true,
+  sameSite: "none" as const,
+  maxAge: 1000 * 60 * 60, // 1 hour of max age,
+  path: "/",
 };
 
 // Generate JWT for the user
@@ -44,7 +47,7 @@ export const verifyToken = (token: string): JwtPayload => {
 
 export const extractUserFromJWT = (
   cookieString: string,
-  role: UserRole
+  role: UserRole,
 ): JwtPayload => {
   const cookies = getCookies(cookieString);
 
