@@ -6,7 +6,19 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server
   },
   {
+    path: 'rooms-list',
+    renderMode: RenderMode.Server
+  },
+  {
+    path: 'home',
+    renderMode: RenderMode.Server
+  },
+  {
+    path: 'login',
+    renderMode: RenderMode.Server
+  },
+  {
     path: '**',
-    renderMode: RenderMode.Prerender
+    renderMode: RenderMode.Server
   }
 ];
