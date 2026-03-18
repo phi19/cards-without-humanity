@@ -6,7 +6,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "vercel-build": "sed -i 's|__BACKEND_URL__|'$BACKEND_URL'|g' src/environments/environment.prod.ts && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
@@ -25,6 +24,7 @@
   },
   "private": true,
   "dependencies": {
+    "cah-shared": "file:../shared",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",

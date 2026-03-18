@@ -1,6 +1,9 @@
 # Fase 1: build
 FROM node:22-alpine AS build
 WORKDIR /app
+
+COPY shared ./shared
+
 COPY package*.json ./
 COPY prisma ./prisma
 RUN npm ci
