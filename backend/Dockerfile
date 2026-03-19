@@ -16,9 +16,14 @@ RUN npm run build
 # Fase 2: runtime
 FROM node:22-alpine
 WORKDIR /app
+
+# Copia o shared compilado
+COPY --from=build /app/shared ./shared
+
+# Copia o backend compilado
+WORKDIR /app/backend
 COPY --from=build /app/backend/dist ./dist
 COPY --from=build /app/backend/prisma ./prisma
-COPY --from=build /app/shared ./shared
 COPY backend/package*.json ./
 RUN npm install --omit=dev
 
