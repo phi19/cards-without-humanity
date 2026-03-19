@@ -49,10 +49,10 @@ jobs:
 
             cd "$APP_DIR"
 
-            echo "DATABASE_URL=${DATABASE_URL}" > .env
-            echo "JWT_SECRET=${JWT_SECRET}" >> .env
-            echo "JWT_EXPIRES_IN=${JWT_EXPIRES_IN}" >> .env
-            echo "FRONTEND_URL=${FRONTEND_URL}" >> .env
+            echo "DATABASE_URL=${DATABASE_URL}" > backend/.env
+            echo "JWT_SECRET=${JWT_SECRET}" >> backend/.env
+            echo "JWT_EXPIRES_IN=${JWT_EXPIRES_IN}" >> backend/.env
+            echo "FRONTEND_URL=${FRONTEND_URL}" >> backend/.env
 
 
             # Se o certificado já existe, ativa a config SSL
