@@ -1,10 +1,31 @@
-FROM node:22
-
+# Fase 1: build
+FROM node:22-alpine AS build
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install --production
-COPY . .
+COPY shared ./shared
+WORKDIR /app/shared
+RUN npm install && npm run build
+
+WORKDIR /app/backend
+COPY backend/package*.json ./
+COPY backend/prisma ./prisma
+RUN npm install
+COPY backend/ .
+RUN npm run build
+
+# Fase 2: runtime
+FROM node:22-alpine
+WORKDIR /app
+
+# Copia o shared compilado
+COPY --from=build /app/shared ./shared
+
+# Copia o backend compilado
+WORKDIR /app/backend
+COPY --from=build /app/backend/dist ./dist
+COPY --from=build /app/backend/prisma ./prisma
+COPY backend/package*.json ./
+RUN npm install --omit=dev
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]

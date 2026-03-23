@@ -3,7 +3,7 @@ name: Deploy to Raspberry PI
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: master
 
       - name: Deploy to Server via SSH
         uses: appleboy/ssh-action@v0.1.10
@@ -21,14 +21,20 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
+          envs: DATABASE_URL,JWT_SECRET,JWT_EXPIRES_IN,FRONTEND_URL
           script: |
             set -e
 
-            APP_DIR="/home/devas/www/cards-without-humanity"
-            REPO_URL="https://github.com/DevasNB/cards-without-humanity.git"
-            BRANCH="main"
+            export DATABASE_URL="${{ secrets.DATABASE_URL }}"
+            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
+            export JWT_EXPIRES_IN="${{ secrets.JWT_EXPIRES_IN }}"
+            export FRONTEND_URL="${{ secrets.FRONTEND_URL }}"
 
-            mkdir -p /home/devas/www
+            APP_DIR="/home/cards/www/cards-without-humanity"
+            REPO_URL="https://github.com/phi19/cards-without-humanity.git"
+            BRANCH="master"
+
+            mkdir -p /home/cards/www
 
             if [ ! -d "$APP_DIR/.git" ]; then
               echo "Cloning repository..."
@@ -43,8 +49,25 @@ jobs:
 
             cd "$APP_DIR"
 
-            echo "Restarting containers..."
+            echo "DATABASE_URL=${DATABASE_URL}" > backend/.env
+            echo "JWT_SECRET=${JWT_SECRET}" >> backend/.env
+            echo "JWT_EXPIRES_IN=${JWT_EXPIRES_IN}" >> backend/.env
+            echo "FRONTEND_URL=${FRONTEND_URL}" >> backend/.env
+
+
+            # Se o certificado já existe, ativa a config SSL
+            if [ -d "/var/lib/docker/volumes/cards-without-humanity_certbot-certs/_data/live/devas.pt" ]; then
+              echo "Certificado SSL encontrado, a usar config SSL..."
+              cp nginx/nginx-ssl.conf nginx/nginx.conf
+            else
+              echo "Sem certificado SSL, a usar config HTTP..."
+            fi
+
+            echo "Rebuilding containers..."
             docker compose down
             docker compose up -d --build
+
+            echo "Reloading Nginx config..."
+            docker compose exec nginx nginx -s reload || true
 
             echo "Deployment completed successfully!"
